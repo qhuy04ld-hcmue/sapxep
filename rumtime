@@ -1,7 +1,43 @@
 #include <iostream>
 using namespace std;
+
+int uc(int a, int b){
+    int r;
+    while (b!=0){
+        r=a%b;
+        a=b;
+        b=r;
+    }
+    return a;
+}
 struct Ps{
+    int tu,mau;
+};
+
+istream& operator>>(istream& is, Ps &p){
+    is>>p.tu>>p.mau;
+    return is;
+}
+
+ostream& operator<<(ostream& os, Ps p){
+    os<<p.tu<<'/'<<p.mau<<endl;
+    return os;
+}
+
+Ps operator+(Ps a, Ps b){
+    Ps c;
+    c.tu=a.tu*b.mau+a.mau*b.tu;
+    c.mau=a.mau*b.mau;
+    int u=uc(c.tu, c.mau);
+    c.tu/=u;
+    c.mau/=u;
+    return c;
+}
 
 int main(){
-  return 0;
+    Ps a,b,c;
+    cin>>a>>b;
+    c=a+b;
+    cout<<c;
+    return 0;
 }
